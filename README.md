@@ -1,5 +1,7 @@
-# Posting RSS updates to Discord using GCP
+# Discord RSS GCP bot
+Posting RSS updates to Discord executed by GCP Functions.
 
+GCP object storage is used to save state between function runs.
 
 ### Requirements
 - A preconfigured a GCP Secret containing your Discord webhook URL.
