@@ -11,14 +11,17 @@ secret_client = secretmanager.SecretManagerServiceClient()
 
 TIMESTAMP_FORMAT = '%d-%m-%Y %H:%M'
 
+
 def upload_timestamp(timestamp):
     timestamp_string = time.strftime(TIMESTAMP_FORMAT, timestamp)
     try:
-        bucket = storage_client.create_bucket(os.getenv('TIMESTAMP_BUCKET'))
-    except:
         bucket = storage_client.bucket(os.getenv('TIMESTAMP_BUCKET'))
-    blob = bucket.blob(os.getenv('TIMESTAMP_OBJECT'))
-    blob.upload_from_string(timestamp_string, content_type='text/plain')
+        blob = bucket.blob(os.getenv('TIMESTAMP_OBJECT'))
+        blob.upload_from_string(timestamp_string, content_type='text/plain')
+    except:
+        bucket = storage_client.create_bucket(os.getenv('TIMESTAMP_BUCKET'))
+        blob = bucket.blob(os.getenv('TIMESTAMP_OBJECT'))
+        blob.upload_from_string(timestamp_string, content_type='text/plain')
 
 
 def download_timestamp():
